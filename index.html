@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSP Games | Official Site</title>
+    <title>MSP Games</title>
+    
+    <link rel="icon" type="image/jpeg" href="https://cdn.discordapp.com/attachments/1479458083255357462/1517816574688366622/MSP_Games.jpg?ex=6a37a857&is=6a3656d7&hm=d2dc779796f2155b7bfcd9fdfb4e27909e9d1fba7d9391da10c58dcb7af4d10f&">
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
-        /* --- DESIGN SYSTEM: BLACK, RED, GOLD DRAGON THEME --- */
+        /* --- DESIGN SYSTEM: BLACK, RED, GOLD DRAGON & ROCKSTAR STRUCTURE --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             scroll-behavior: smooth;
+            text-transform: uppercase;
         }
 
         body {
-            background-color: #0b0b0b;
+            background-color: #000000;
             color: #ffffff;
             overflow-x: hidden;
+            letter-spacing: 1px;
         }
 
         /* Top Navigation Bar */
@@ -25,80 +31,116 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background: rgba(11, 11, 11, 0.95);
-            border-bottom: 2px solid #b89430;
+            padding: 15px 50px;
+            background: #000000;
+            border-bottom: 2px solid #222222;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #d62828;
-            text-shadow: 0 0 10px rgba(214, 40, 40, 0.6);
+        /* Rockstar Boxed Image Logo Concept */
+        .logo-wrapper {
+            height: 55px;
+            width: 55px;
             cursor: pointer;
+            border: 2px solid #d62828;
+            padding: 2px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s ease;
         }
 
-        .logo span {
-            color: #b89430;
+        .logo-wrapper:hover {
+            border-color: #b89430;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
         }
 
         nav a {
-            color: #cccccc;
+            color: #aaaaaa;
             text-decoration: none;
-            margin-left: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: 0.2s ease;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
             color: #b89430;
+            box-shadow: inset 0 -4px 0 #b89430;
+            padding-bottom: 5px;
         }
 
-        /* Multi-page System Layout */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #b89430;
+        }
+
+        /* Multi-page Display Layout */
         .page {
             display: none;
             min-height: 100vh;
-            padding-top: 74px;
+            padding-top: 86px;
         }
 
         .page.active-page {
             display: block;
         }
 
-        /* --- HERO BANNER BACKGROUND VIDEO AREA --- */
-        .hero {
+        /* --- ROCKSTAR HERO CINEMATIC VIDEO BACKGROUND BANNER --- */
+        .hero-video-frame {
             position: relative;
-            height: calc(100vh - 74px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            width: 100%;
+            height: 75vh;
+            background: #000;
             overflow: hidden;
+            border-bottom: 4px solid #d62828;
         }
 
-        /* Lock background trailer exclusively behind the home header banner text */
-        .hero-bg-video {
+        .video-foreground,
+        .hero-video-frame iframe {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
-            height: 56.25vw; /* 16:9 Aspect Ratio */
-            min-height: 100%;
-            min-width: 177.77vh;
+            height: 56.25vw;
+            min-height: 75vh;
+            min-width: 134vh;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.25; /* Blended dark aesthetic background tone */
         }
 
         .hero-overlay {
@@ -107,176 +149,337 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(11,11,11,0.6) 0%, #0b0b0b 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 80%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 8% 50px 8%;
             z-index: 2;
         }
 
-        .hero-text-content {
-            position: relative;
-            z-index: 3;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 80px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
+        .hero-overlay h1 {
+            font-size: clamp(40px, 7vw, 75px);
+            font-weight: 900;
             color: #ffffff;
-            text-shadow: 3px 3px 0px #d62828;
+            line-height: 0.95;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
         }
 
-        .hero .slogan {
-            font-size: 20px;
+        .hero-overlay .slogan {
+            font-size: clamp(12px, 2vw, 18px);
             color: #b89430;
             letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 15px 0 35px 0;
             font-weight: bold;
-            font-style: italic;
+            margin-bottom: 25px;
         }
 
-        /* Premium Buttons */
-        .btn {
-            background: #d62828;
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid transparent;
-            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.4);
-            transition: 0.3s ease;
+        /* Video Swapper Tabs */
+        .video-switcher-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 2px solid #222;
+            background: #000;
+        }
+
+        .switcher-btn {
+            background: #000;
+            border: none;
+            border-right: 1px solid #222;
+            color: #666;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 20px;
             cursor: pointer;
-            display: inline-block;
+            letter-spacing: 2px;
+            transition: all 0.2s ease;
         }
 
-        .btn:hover {
-            background: transparent;
-            border-color: #b89430;
-            color: #b89430;
-            box-shadow: 0 5px 15px rgba(184, 148, 48, 0.4);
+        .switcher-btn:hover, .switcher-btn.active {
+            color: #fff;
+            background: #0a0a0a;
+            box-shadow: inset 0 -4px 0 #b89430;
         }
 
-        /* Unified Layout Containers */
+        /* --- POSTER AUTO-SCROLL CAROUSEL --- */
+        .poster-carousel-container {
+            position: relative;
+            width: 100%;
+            background: #050505;
+            border-bottom: 2px solid #222;
+            overflow: hidden;
+        }
+
+        .poster-carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 100%;
+        }
+
+        .poster-slide {
+            min-width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .poster-slide img {
+            width: 100%;
+            max-height: 550px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .poster-slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+            padding: 40px 8%;
+            text-align: left;
+        }
+
+        .poster-slide-tag {
+            color: #d62828;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .poster-slide-title {
+            color: #fff;
+            font-size: clamp(20px, 3vw, 32px);
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #333;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-arrow:hover {
+            background: #d62828;
+            border-color: #d62828;
+        }
+
+        .carousel-arrow.left { left: 20px; }
+        .carousel-arrow.right { right: 20px; }
+
+        /* --- STRUCTURAL ROCKSTAR GRID WIREFRAME --- */
         .container {
-            max-width: 1300px;
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 80px 40px;
+            padding: 80px 8%;
         }
 
         .page-title {
-            font-size: 40px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-align: center;
-            margin-bottom: 60px;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 50px;
             color: #ffffff;
-            border-bottom: 2px solid #b89430;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            position: relative;
-            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        /* Grid Frameworks */
+        .page-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: #222222;
+        }
+
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 50px;
-            align-items: flex-start;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
         }
 
-        /* Original Premium Cards Layout */
-        .card {
-            background: #121212;
-            border: 1px solid #222;
-            border-top: 4px solid #d62828;
+        .featured-card {
+            grid-column: 1 / -1;
+            background: #0a0a0a;
+            border: 1px solid #d62828;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 40px;
+            transition: border-color 0.2s ease;
+        }
+
+        .featured-card:hover {
+            border-color: #b89430;
+        }
+
+        .featured-img-wrapper {
+            flex: 1;
+            min-height: 350px;
+            max-height: 500px;
             overflow: hidden;
-            transition: 0.4s ease;
+            border-right: 1px solid #222;
+        }
+
+        .featured-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-body {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (max-width: 900px) {
+            .featured-card {
+                flex-direction: column;
+            }
+            .featured-img-wrapper {
+                border-right: none;
+                border-bottom: 1px solid #222;
+                max-height: 300px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Post Cards */
+        .card {
+            background: #0a0a0a;
+            border: 1px solid #222222;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-top-color: #b89430;
+            transform: translateY(-4px);
+            border-color: #444;
         }
 
         .card-img {
             width: 100%;
-            height: 220px;
+            height: 230px;
             object-fit: cover;
-            background-color: #222;
+            border-bottom: 1px solid #222222;
         }
 
         .card-body {
-            padding: 25px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .card-meta {
-            color: #b89430;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .card-title {
-            font-size: 22px;
-            text-transform: uppercase;
+            color: #d62828;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
             margin-bottom: 12px;
         }
 
+        .card-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+
         .card-desc {
-            color: #aaa;
-            font-size: 14px;
+            text-transform: none;
+            color: #aaaaaa;
+            font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .btn, .card-link {
+            background: #d62828;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 2px;
+            border: none;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover, .card-link:hover {
+            background: #b89430;
+            color: #000;
         }
 
         .card-link {
-            color: #b89430;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 13px;
-            cursor: pointer;
+            margin-top: auto;
+            background: transparent;
+            border: 2px solid #222;
+            color: #fff;
         }
 
-        .card-link:hover {
-            color: #d62828;
-        }
-
-        /* Policy & Tech Specification Blocks */
         .spec-item {
             border-bottom: 1px solid #222;
-            padding: 25px 0;
+            padding: 30px 0;
         }
+        
         .spec-item h3 {
             color: #b89430;
-            text-transform: uppercase;
-            font-size: 18px;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            font-size: 19px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
+        
         .spec-item h3 span {
             color: #d62828;
-            font-size: 12px;
-            margin-left: 10px;
+            font-size: 11px;
             border: 1px solid #d62828;
-            padding: 2px 6px;
-            vertical-align: middle;
+            padding: 2px 8px;
+            font-weight: 800;
         }
 
         .rich-text p {
-            color: #ccc;
+            text-transform: none;
+            color: #cccccc;
             font-size: 16px;
             line-height: 1.8;
             margin-bottom: 20px;
@@ -284,145 +487,391 @@
 
         .highlight-box {
             border-left: 4px solid #b89430;
-            background: #141414;
-            padding: 25px;
+            background: #0a0a0a;
+            border-top: 1px solid #222;
+            border-right: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 30px;
             margin: 30px 0;
         }
 
-        /* Input Form Panels */
         .form-panel {
-            background: #121212;
+            background: #0a0a0a;
             border: 1px solid #222;
             padding: 40px;
-            border-radius: 4px;
+            width: 100%;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            text-transform: uppercase;
             font-size: 12px;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
             color: #b89430;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 12px;
+            background: #000000;
+            border: 2px solid #222;
+            padding: 15px;
             color: #fff;
             font-size: 14px;
-            border-radius: 2px;
+            outline: none;
         }
 
-        /* Footer */
+        .blog-poster-header {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border: 1px solid #222;
+            margin-bottom: 40px;
+        }
+
+        /* Dedicated Custom Newsletter Panel with Background Matrix Override */
+        .newsletter-custom-panel {
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://cdn.discordapp.com/attachments/1479458083255357462/1517837421654311042/newsletter_background_image.png?ex=6a37bbc1&is=6a366a41&hm=b36e4c4494bb875ac3df742f75f8c6bafa218689ff9c8d5b7ea0a221a3144081&');
+            background-size: cover;
+            background-position: center;
+            border-top: 4px solid #d62828;
+            border-bottom: 4px solid #b89430;
+            padding: 80px 8%;
+            margin-top: 40px;
+        }
+
+        .newsletter-custom-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Identity Banner for Ecosystem Elements */
+        .identity-banner {
+            width: 100%;
+            height: 180px;
+            background: #000;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .identity-banner img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
         footer {
-            background: #050505;
+            background: #000000;
             text-align: center;
-            padding: 40px;
-            border-top: 1px solid #222;
-            color: #666;
+            padding: 50px 20px;
+            border-top: 2px solid #222222;
+            color: #555555;
             font-size: 12px;
-            letter-spacing: 1px;
-            margin-top: 50px;
+            letter-spacing: 2px;
+            margin-top: 80px;
+            width: 100%;
+        }
+
+        /* --- ALL-PLATFORM COMPATIBILITY LAYER (ANDROID, IOS, TABLET, DEKTOP) --- */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 60px 5%;
+            }
+            .hero-video-frame {
+                height: 60vh;
+            }
+        }
+
+        @media (max-width: 850px) {
+            header { padding: 15px 24px; }
+            .menu-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 84px;
+                left: 0;
+                width: 100%;
+                background: #000000;
+                border-bottom: 2px solid #222222;
+                padding: 30px 0;
+            }
+            .nav-links.mobile-open { display: flex; }
+            nav a {
+                margin: 15px 0;
+                font-size: 14px;
+                width: 100%;
+                text-align: center;
+            }
+            .video-switcher-tabs { grid-template-columns: 1fr; }
+            .hero-video-frame { height: 50vh; }
+            .newsletter-custom-panel { padding: 50px 5%; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 40px 4%; }
+            .page-title { font-size: 24px; margin-bottom: 30px; }
+            .form-panel { padding: 20px; }
+            .btn, .card-link { width: 100%; padding: 12px 20px; }
+            .poster-slide-overlay { padding: 20px 5%; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo" onclick="switchPage('home')">MSP <span>GAMES</span></div>
+        <div class="logo-wrapper" onclick="switchPage('home')">
+            <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1517816574688366622/MSP_Games.jpg?ex=6a37a857&is=6a3656d7&hm=d2dc779796f2155b7bfcd9fdfb4e27909e9d1fba7d9391da10c58dcb7af4d10f&" alt="MSP Games Logo" class="logo-image">
+        </div>
         <nav>
-            <a onclick="switchPage('home')" id="nav-home" class="active">Home</a>
-            <a onclick="switchPage('games')" id="nav-games">Games</a>
-            <a onclick="switchPage('nitra')" id="nav-nitra">Nitra Launcher</a>
-            <a onclick="switchPage('about')" id="nav-about">About Us</a>
-            <a onclick="switchPage('policies')" id="nav-policies">Studio Policies</a>
-            <a onclick="switchPage('future')" id="nav-future">Future Plans</a>
-            <a onclick="switchPage('press')" id="nav-press">Press & Media</a>
+            <div class="nav-links" id="navLinks">
+                <a onclick="switchPage('home')" id="nav-home" class="active">Home</a>
+                <a onclick="switchPage('games')" id="nav-games">Games</a>
+                <a onclick="switchPage('nitra')" id="nav-nitra">Nitra Hub</a>
+                <a onclick="switchPage('about')" id="nav-about">About Us</a>
+                <a onclick="switchPage('policies')" id="nav-policies">Studio Policies</a>
+                <a onclick="switchPage('future')" id="nav-future">Future Plans</a>
+                <a onclick="switchPage('press')" id="nav-press">Press & Media</a>
+                <a onclick="switchPage('support')" id="nav-support">Support</a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
 
     <div id="page-home" class="page active-page">
-        <section class="hero">
-            <iframe class="hero-bg-video" src="https://www.youtube.com/embed/-gsg3m60HCE?autoplay=1&mute=1&controls=0&loop=1&playlist=-gsg3m60HCE&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media"></iframe>
-            <div class="hero-overlay"></div>
-            
-            <div class="hero-text-content">
-                <h1>MSP GAMES</h1>
-                <div class="slogan">Atmospheric Horror & High-Octane Action</div>
-                <a onclick="switchPage('games')" class="btn">Explore Games</a>
+        <div class="hero-video-frame">
+            <div id="rsHomePlayer"></div>
+            <div class="hero-overlay">
+                <h1 id="heroDisplayTitle">Silent Noise<br>Prologue</h1>
+                <div class="slogan" id="heroDisplayTag">Atmospheric Horror & High-Octane Action</div>
+                <div>
+                    <a onclick="switchPage('games')" class="btn">Explore Games</a>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <div class="video-switcher-tabs">
+            <button id="btn-tab-0" class="switcher-btn active" onclick="userSelectVideo(0)">Speed Up Announcement</button>
+            <button id="btn-tab-1" class="switcher-btn" onclick="userSelectVideo(1)">Silent Noise Prologue</button>
+            <button id="btn-tab-2" class="switcher-btn" onclick="userSelectVideo(2)">Launch Teaser</button>
+        </div>
+
+        <div class="poster-carousel-container">
+            <button class="carousel-arrow left" onclick="manualMoveCarousel(-1)">&#10094;</button>
+            <button class="carousel-arrow right" onclick="manualMoveCarousel(1)">&#10095;</button>
+            <div class="poster-carousel-track" id="posterTrack">
+                <div class="poster-slide">
+                    <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1513227414971613264/Silent_Noise_Prologue_linkdin_post_poster_1.png?ex=6a37711a&is=6a361f9a&hm=e95cf029af2d2d3fe8d49acb1c0f320809a22d35c1a8b3ff0ac68de40a8223e7&" alt="Silent Noise Rating Poster">
+                    <div class="poster-slide-overlay">
+                        <div class="poster-slide-tag">Critical Acclaim</div>
+                        <h2 class="poster-slide-title">5-Star Rating Achieved within 6 Days of Launch!</h2>
+                    </div>
+                </div>
+                <div class="poster-slide">
+                    <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1517822566243368970/Silent_noise_Thumbnail_2.png?ex=6a37adeb&is=6a365c6b&hm=8859bd0c5400ca9a6dedc59df3366c2aac800b80216024eea29a664fbe02f1eb&" alt="Silent Noise Chapter 1 Pre-orders">
+                    <div class="poster-slide-overlay">
+                        <div class="poster-slide-tag">Pre-Order Deployment</div>
+                        <h2 class="poster-slide-title">Chapter 1 Pre-Orders Slated for July Window</h2>
+                    </div>
+                </div>
+                <div class="poster-slide">
+                    <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1517812854953082910/COMMUNITY_TESTER_PROGRAM.png?ex=6a37a4e0&is=6a365360&hm=143bbe82d40e5aeb40d766b18d614c15a56aa80260d8e9cfafff32acf4c9aaa2&" alt="Bootstrap Patch Notes">
+                    <div class="poster-slide-overlay">
+                        <div class="poster-slide-tag">Live Patch</div>
+                        <h2 class="poster-slide-title">Silent Noise: Prologue - Bootstrap Update Released</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="container">
             <h2 class="page-title">Latest Intel</h2>
+            
+            <div class="featured-card">
+                <div class="featured-img-wrapper">
+                    <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1513227414971613264/Silent_Noise_Prologue_linkdin_post_poster_1.png?ex=6a37711a&is=6a361f9a&hm=e95cf029af2d2d3fe8d49acb1c0f320809a22d35c1a8b3ff0ac68de40a8223e7&" alt="5 Star Success" class="featured-img">
+                </div>
+                <div class="featured-body">
+                    <div class="card-meta">Milestone Dispatch • Critical Review</div>
+                    <h3 class="card-title" style="font-size: clamp(22px, 3vw, 32px);">Silent Noise: Prologue Claims 5-Star Standing</h3>
+                    <p class="card-desc">We are completely blown away. Within exactly 6 days of global release, player feedback aggregates locked a perfect 5-star rating matrix on our launch build clusters.</p>
+                    <div>
+                        <a onclick="switchPage('milestone-article')" class="btn">View Global Metrics →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="featured-card" style="border-color: #222;">
+                <div class="featured-img-wrapper">
+                    <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1517812854953082910/COMMUNITY_TESTER_PROGRAM.png?ex=6a37a4e0&is=6a365360&hm=143bbe82d40e5aeb40d766b18d614c15a56aa80260d8e9cfafff32acf4c9aaa2&" alt="Bootstrap Engine Log" class="featured-img">
+                </div>
+                <div class="featured-body">
+                    <div class="card-meta">Engine Patch Logs • Live Build</div>
+                    <h3 class="card-title" style="font-size: clamp(22px, 3vw, 32px);">Prologue: Bootstrap Update Changelog</h3>
+                    <p class="card-desc">Bugs eliminated and script holes closed. We've introduced psychological systems directly into the free iteration: Sanity index scaling, heart rate hazards, and dynamic character dialogue paths.</p>
+                    <div>
+                        <a onclick="switchPage('bootstrap-changelog')" class="btn">Read Full Patch Log →</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="grid-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-meta">Ecosystem Update</div>
-                        <h3 class="card-title">Nitra Ecosystem Architecture</h3>
-                        <p class="card-desc">Introducing Nitra Launcher, our proprietary distribution station featuring built-in AI support protocols and robust hardware-focused DRM safeguards.</p>
-                        <a onclick="switchPage('nitra')" class="card-link">Review Core Tech →</a>
+                        <div class="card-meta">Pre-Order Bulletin</div>
+                        <h3 class="card-title">Chapter 1: Pre-Orders Announced</h3>
+                        <p class="card-desc">Get ready for the full horrors of Willow Park. Pre-order lines for Chapter 1: The Park Shift open this July.</p>
+                        <a onclick="switchPage('preorder-blog')" class="card-link">Review Order Matrix →</a>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-meta">Company News</div>
-                        <h3 class="card-title">Going Full PC & Console</h3>
-                        <p class="card-desc">Announcing our structural pivot focusing exclusively on premium high-end environments built for desktop hardware form factors.</p>
-                        <a onclick="switchPage('about')" class="card-link">Read Manifest →</a>
+                        <div class="card-meta">Technical Deep Dive</div>
+                        <h3 class="card-title">Detailed Nitra Analysis</h3>
+                        <p class="card-desc">Discover the core infrastructure behind Nitra, our unified environment build distribution platform.</p>
+                        <a onclick="switchPage('nitra-blog')" class="card-link">Read Tech Analysis →</a>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-meta">Operations</div>
-                        <h3 class="card-title">Studio Policies Framework</h3>
-                        <p class="card-desc">Information transparency across our pipelines. Read about our project models, quality rules, and non-disclosure standards.</p>
-                        <a onclick="switchPage('policies')" class="card-link">Read Policies →</a>
+                        <div class="card-meta">Corporate Operations</div>
+                        <h3 class="card-title">Nitra+ Enterprise Licensing</h3>
+                        <p class="card-desc">Discover institutional-grade anti-piracy models engineered for multi-million dollar corporate titles.</p>
+                        <a onclick="switchPage('nitra')" class="card-link">Review Protection →</a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter-custom-panel">
+            <div class="newsletter-custom-content text-center">
+                <div class="card-meta" style="text-align: center; color: #b89430; margin-bottom: 10px;">Player Dispatch Systems</div>
+                <h2 style="font-size: clamp(28px, 4vw, 48px); text-align: center; font-weight: 900; margin-bottom: 20px;">Subscribe For Intel</h2>
+                <p style="text-transform: none; color: #dddddd; line-height: 1.8; text-align: center; font-size: 16px; margin-bottom: 40px;">
+                    Enlist your communications link into our real-time notification node. Subscribed players receive automatic, instant game drops, patch matrix warnings, and system alerts fired directly through their secure browser ecosystem.
+                </p>
+                <div class="form-panel" style="max-width: 600px; margin: 0 auto;">
+                    <div class="form-group" style="text-align: left;">
+                        <label for="newsletterEmail">Player Email Protocol</label>
+                        <input type="email" id="newsletterEmail" placeholder="ENTER VALID MAIL COORDINATES...">
+                    </div>
+                    <button class="btn" style="width: 100%;" onclick="triggerBrowserSubscription()">Subscribe Via Browser</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter-custom-panel" style="margin-top: 0; background-image: none; background: #050505;">
+            <div class="newsletter-custom-content text-center">
+                <div class="card-meta" style="text-align: center; color: #b89430; margin-bottom: 10px;">Developer Ecosystem Core</div>
+                <h2 style="font-size: clamp(28px, 4vw, 48px); text-align: center; font-weight: 900; margin-bottom: 20px;">The Nitra+ Manifesto</h2>
+                <p style="text-transform: none; color: #dddddd; line-height: 1.8; text-align: center; font-size: 16px; margin-bottom: 40px;">
+                    Built on pillars of raw comfortability, structural compatibility, and absolute defense matrices against digital piracy. We are opening the doors to indie creators with an unmatched economic blueprint: your first game is 100% free to publish, followed by flat ₹5,000 deployment fees and a highly competitive 15% revenue share cap. 
+                </p>
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <button class="btn" onclick="switchPage('nitra')">Explore SDK Framework</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="page-milestone-article" class="page">
+        <div class="container" style="max-width: 1000px;">
+            <h2 class="page-title">Operational Record: 5 Stars In 6 Days</h2>
+            <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1513227414971613264/Silent_Noise_Prologue_linkdin_post_poster_1.png?ex=6a37711a&is=6a361f9a&hm=e95cf029af2d2d3fe8d49acb1c0f320809a22d35c1a8b3ff0ac68de40a8223e7&" alt="Milestone Poster" class="blog-poster-header">
+            <div class="rich-text">
+                <p><strong>A Massive Validation of Atmospheric Horror Design</strong></p>
+                <p>When we pushed the executable packages of <em>Silent Noise: Prologue</em> onto production distribution paths, we recognized that bypassing traditional jump-scare logic was an operational risk. The response from our player validation metrics has been definitive.</p>
+                <p>In just 6 short days post-launch, active testers and community players evaluated the gameplay loops, atmospheric audio vectors, and psychological elements, pushing our ratings matrix to an unblemished 5-star standard. This historic studio milestone solidifies our focus as we expand our pipeline arrays into the next chapters of development.</p>
+            </div>
+            <div style="margin-top:40px;"><a onclick="switchPage('home')" class="card-link" style="padding: 12px 24px;">← Return To Main Hub</a></div>
+        </div>
+    </div>
+
+    <div id="page-preorder-blog" class="page">
+        <div class="container" style="max-width: 1000px;">
+            <h2 class="page-title">Production Entry: Chapter 1 Pre-Order Channels</h2>
+            <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1517822566243368970/Silent_noise_Thumbnail_2.png?ex=6a37adeb&is=6a365c6b&hm=8859bd0c5400ca9a6dedc59df3366c2aac800b80216024eea29a664fbe02f1eb&" alt="Pre-order Banner" class="blog-poster-header">
+            <div class="rich-text">
+                <p><strong>Secure Your Entry Into Willow Park This July</strong></p>
+                <p>Following the incredible critical breakout of the Prologue runtime environment, MSP Games is officially tracking the market readiness parameters for <strong>Silent Noise Chapter 1: The Park Shift</strong>.</p>
+                <p>The operational window for player pre-order integration is formally scheduled to go live this coming <strong>July</strong>. Enlisting in the pre-order matrix unlocks exclusive early engineering builds, developer telemetry updates, and archival digital layout kits before global platform releases drop.</p>
+            </div>
+            <div style="margin-top:40px;"><a onclick="switchPage('home')" class="card-link" style="padding: 12px 24px;">← Return To Main Hub</a></div>
+        </div>
+    </div>
+
+    <div id="page-bootstrap-changelog" class="page">
+        <div class="container" style="max-width: 1000px;">
+            <h2 class="page-title">Patch Log: Prologue Bootstrap Framework</h2>
+            <div class="rich-text">
+                <p><strong>Refining Narrative Consistency & Core Mechanics</strong></p>
+                <p>The operational team has just pushed out a major stability and mechanical update to the live <em>Silent Noise: Prologue</em> environment. This build addresses core script adjustments while introducing advanced mechanics designed to heighten immersion parameters inside the free tier.</p>
+                
+                <div class="highlight-box">
+                    <h3 style="color:#b89430; font-size:18px; margin-bottom:10px;">Key Updates & Bug Polish</h3>
+                    <p style="margin:0; font-size:15px; text-transform:none; color:#bbb;">Resolved execution crashes, corrected environmental render faults, and addressed narrow storyline loopholes to optimize character progression paths through David's shifts.</p>
+                </div>
+
+                <div class="spec-item">
+                    <h3>Sanity Index & Heart Rate Failure Systems</h3>
+                    <p style="color:#aaa; font-size:14px; text-transform:none;">Players must now closely track David's neurological indicators. Allowing the Sanity indicator to critically drop triggers rapid heart-rate hazards, leading to absolute neurological shock and instant failure scenarios ("Dead by Sanity").</p>
+                </div>
+                <div class="spec-item">
+                    <h3>Heightened Object Interaction Matrices</h3>
+                    <p style="color:#aaa; font-size:14px; text-transform:none;">Expanded environmental mechanics. Users can interact with a wider variety of ambient items, structural switches, and park objects to gather hidden intel or build survival layouts.</p>
+                </div>
+                <div class="spec-item">
+                    <h3>Dynamic Character Vocalization Loops</h3>
+                    <p style="color:#aaa; font-size:14px; text-transform:none;">To deepen psychological realism, we have layered randomized ambient dialogues and internal commentary systems into David's behavior trees, reacting directly to environmental stressors.</p>
+                </div>
+            </div>
+            <div style="margin-top:40px;"><a onclick="switchPage('home')" class="card-link" style="padding: 12px 24px;">← Return To Main Hub</a></div>
+        </div>
+    </div>
+
+    <div id="page-nitra-blog" class="page">
+        <div class="container" style="max-width: 1000px;">
+            <h2 class="page-title">Technical Brief: The Nitra Infrastructure Blueprint</h2>
+            <div class="rich-text">
+                <p><strong>A Detailed Examination of Our Ecosystem Blueprint</strong></p>
+                <p>Nitra was engineered with a clear target: to rewrite the paradigms of modern PC game launcher setups. Instead of heavy backgrounds and platform lag, Nitra uses direct thread control to run game environments at peak capacity with zero background overhead.</p>
+                <p>By keeping launcher footprint profiles minimal, we ensure that every ounce of hardware performance is channeled directly into your games.</p>
+            </div>
+            <div style="margin-top:40px;"><a onclick="switchPage('home')" class="card-link" style="padding: 12px 24px;">← Return To Main Hub</a></div>
+        </div>
+    </div>
+
     <div id="page-games" class="page">
         <div class="container">
-            <h2 class="page-title">Our Catalogue</h2>
-            <div class="grid-3">
+            <h2 class="page-title">Production Catalog</h2>
+            <div class="grid-2">
                 <div class="card">
-                    <img src="silent-noise.jpg" alt="Silent Noise" class="card-img">
+                    <img src="https://cdn.discordapp.com/attachments/1479458083255357462/1517822566243368970/Silent_noise_Thumbnail_2.png?ex=6a37adeb&is=6a365c6b&hm=8859bd0c5400ca9a6dedc59df3366c2aac800b80216024eea29a664fbe02f1eb&" class="card-img" alt="Silent Noise">
                     <div class="card-body">
-                        <div class="card-meta">Psychological Horror • PC</div>
-                        <h3 class="card-title">Silent Noise</h3>
-                        <p class="card-desc">A deep, terrifying psychological horror experience built in the Godot engine. Face the crushing isolation and the shadows that watch back.</p>
-                        <a href="https://msp-games.itch.io/" target="_blank" class="card-link">Play Now →</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="prologue.png" alt="Silent Noise: Prologue" class="card-img">
-                    <div class="card-body">
-                        <div class="card-meta">Atmospheric Teaser • PC</div>
+                        <div class="card-meta">Psychological Horror • Live Environment</div>
                         <h3 class="card-title">Silent Noise: Prologue</h3>
-                        <p class="card-desc">Enter the fog as David, a night-shift park caretaker burdened by grief. Immerse yourself in tension over simple jump scares.</p>
-                        <a href="https://msp-games.itch.io/" target="_blank" class="card-link">Play Demo →</a>
+                        <p class="card-desc">Navigate the atmospheric, harrowing depths of an midnight security watch. Your sanity index maps your survival threshold.</p>
+                        <button class="btn" onclick="userSelectVideo(1); switchPage('home')">Stream Launch Intel</button>
                     </div>
                 </div>
-
                 <div class="card">
-                    <img src="speed-up.jpg" alt="Speed Up: City Racer" class="card-img">
-                    <div class="card-body">
-                        <div class="card-meta">Arcade Racing • PC / Console</div>
-                        <h3 class="card-title">Speed Up: City Racer</h3>
-                        <p class="card-desc">A fast-paced, story-driven illegal street racing arcade experience. Push limits across glowing neon concrete jungles.</p>
-                        <a href="https://msp-games.itch.io/" target="_blank" class="card-link">Check Build →</a>
+                    <div class="card-body" style="justify-content: center; background: #050505; border: 2px dashed #333; text-align: center;">
+                        <h3 class="card-title" style="color: #b89430;">Project: Speed Up</h3>
+                        <div class="card-meta">Racing Matrix • In Alpha Development</div>
+                        <p class="card-desc">High-octane physics loops and custom modular engineering vectors. Deployment scheduled for upcoming roadmap blocks.</p>
+                        <button class="card-link" onclick="userSelectVideo(0); switchPage('home')">View Pipeline Teaser</button>
                     </div>
                 </div>
             </div>
@@ -431,31 +880,22 @@
 
     <div id="page-nitra" class="page">
         <div class="container">
-            <h2 class="page-title">Nitra Launcher</h2>
-            <div class="grid-2">
-                <div class="rich-text">
-                    <p><strong>Nitra Launcher</strong> is MSP Games' proprietary, next-generation ecosystem deployment workspace designed to maximize machine resources while establishing impenetrable gameplay integrity.</p>
-                    <div class="highlight-box">
-                        <h4 style="color:#b89430; text-transform:uppercase; margin-bottom:5px;">Ecosystem Roadmap</h4>
-                        <p style="margin:0; font-size:14px; color:#aaa;">Currently executing as an internal deployment array. Nitra will officially open distribution access avenues to certified third-party independent developers as soon as client stability indexes achieve perfect certification parity.</p>
+            <h2 class="page-title">Nitra Ecosystem Setup</h2>
+            <div class="highlight-box">
+                <h3 style="color: #fff; margin-bottom: 15px;">Universal Deployment Network</h3>
+                <p style="text-transform: none; color: #aaa; margin: 0;">Nitra functions as the unified architecture for asset deliveries and runtime distributions across MSP Games systems. Our multi-threaded core structure lowers memory usage parameters while implementing deep anti-tamper security layers.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title" style="font-size: 18px;">Independent Track</h3>
+                        <p class="card-desc">Deploy 1 title completely free of system overhead. Simple flat ₹5,000 scaling parameters follow.</p>
                     </div>
                 </div>
-                <div style="background:#121212; border:1px solid #222; padding:30px; border-left:4px solid #d62828;">
-                    <h3 style="text-transform:uppercase; margin-bottom:20px; font-size:22px; color:#fff;">Launcher Blueprint Specs</h3>
-                    
-                    <div class="spec-item">
-                        <h3>Nitra AI Integration <span>Active</span></h3>
-                        <p style="color:#aaa; font-size:14px;">An active system layer engine that monitors client environments to guide players, optimize hardware performance loops, and immediately troubleshoot runtime anomalies on the fly.</p>
-                    </div>
-
-                    <div class="spec-item">
-                        <h3>Advanced AI-Powered DRM <span>99.9% Anti-Piracy</span></h3>
-                        <p style="color:#aaa; font-size:14px;">The most advanced digital rights management layout engineered by MSP Games. Backed by Nitra AI models, it achieves an uncompromising anti-piracy matrix safety guarantee without heavy overheads.</p>
-                    </div>
-
-                    <div class="spec-item">
-                        <h3>Zero Overhead footprint <span>Ultra-Light</span></h3>
-                        <p style="color:#aaa; font-size:14px;">Engineered for efficiency. Nitra requires no intrusive 24/7 scanning loops or processing interruptions, preserving raw processor bandwidth for game visual pipelines.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title" style="font-size: 18px;">Enterprise Protection</h3>
+                        <p class="card-desc">Multi-layered defensive clusters providing comprehensive run-time security definitions for AAA budgets.</p>
                     </div>
                 </div>
             </div>
@@ -463,130 +903,224 @@
     </div>
 
     <div id="page-about" class="page">
-        <div class="container">
-            <h2 class="page-title">About MSP Games</h2>
-            <div class="grid-2">
-                <div class="rich-text">
-                    <p>MSP Games is a premium <strong>Indian video game development company</strong> built specifically to manufacture uncompromising PC and Console titles for global deployment markets.</p>
-                    <p>We reject standard casual layouts. Our core philosophy operates on standardizing rich atmospheric design, system physics, and deep player immersion.</p>
-                    <div class="highlight-box">
-                        <h3 style="color:#b89430; margin-bottom:5px; text-transform:uppercase;">The Mission</h3>
-                        <p style="margin:0; font-size:15px;">To challenge mainstream paradigms, advance local technical engineering capabilities, and <strong>build the definitive future of Indian gaming</strong>.</p>
-                    </div>
-                </div>
-                <div style="border: 2px solid #b89430; padding: 40px; background: #121212; text-align:center;">
-                    <h3 style="font-size:28px; letter-spacing:2px; color:#d62828;">"BORN TO CREATE LEGACY"</h3>
-                </div>
+        <div class="container" style="max-width: 900px;">
+            <h2 class="page-title">About The Studio</h2>
+            <div class="rich-text">
+                <p>MSP Games is an independent interactive simulation pipeline. We design experiences focused on deep structural atmosphere, architectural world design, and meticulous technical stability across processing platforms.</p>
+                <p>By bypassing conventional structural trends, our operational mission statement focuses on pushing performance vectors and narrative focus boundaries without compromising platform hardware capabilities.</p>
             </div>
         </div>
     </div>
 
     <div id="page-policies" class="page">
-        <div class="container">
-            <h2 class="page-title">Studio Operations & Policies</h2>
-            <div style="max-width:900px; margin:0 auto;">
-                <div class="spec-item">
-                    <h3>Project-Based Work Structure</h3>
-                    <p style="color:#ccc; line-height:1.6; font-size:15px;">Development execution centers strictly around structured operational modules. Milestones are systematically scoped by target build phases rather than traditional tracking paradigms to ensure high focus on mechanics.</p>
-                </div>
-                <div class="spec-item">
-                    <h3>Remote Work Operations</h3>
-                    <p style="color:#ccc; line-height:1.6; font-size:15px;">Unrestricted geographic capability. Our architecture empowers global talent loops to deploy modifications securely to engine clusters across distributed nodes from anywhere on earth.</p>
-                </div>
-                <div class="spec-item">
-                    <h3>Vacation & Operational Re-charging</h3>
-                    <p style="color:#ccc; line-height:1.6; font-size:15px;">Burnout prevention rules are systematically applied. Clear recovery intervals track completion of heavy alpha milestones, maintaining long-term pipeline consistency without lowering asset quality thresholds.</p>
-                </div>
-                <div class="spec-item">
-                    <h3>Quality Assurance Safeguard Protocol</h3>
-                    <p style="color:#ccc; line-height:1.6; font-size:15px;">Every script, sound vector, and dynamic system element undergoes hard mechanical testing. If frame parameters degrade or aesthetic immersion drops, assets route instantly back to the drafting workspaces.</p>
-                </div>
-                <div class="spec-item">
-                    <h3>Non-Disclosure Security Protocol (NDA Policy)</h3>
-                    <p style="color:#ccc; line-height:1.6; font-size:15px;">Impenetrable operational secrecy. All personnel, external testing networks, and production agents remain legally bound to protect code frameworks, unannounced story mechanics, and assets from unauthorized leaks.</p>
-                </div>
+        <div class="container" style="max-width: 900px;">
+            <h2 class="page-title">Studio Policies & Directives</h2>
+            <div class="rich-text">
+                <p><strong>Player Data Security Matrix</strong></p>
+                <p>MSP Games enforces strict isolation of system telemetry. No persistent player profiling is permitted inside our production code blocks. Analytical tracking protocols are aggregated cleanly to maintain absolute network anonymity definitions.</p>
+                <p><strong>Anti-Tamper & Content Protection Laws</strong></p>
+                <p>Asset modifications or runtime debugging hooks applied to active deployment files outside official SDK allowances violate our terminal access terms and automatically drop engine connection routes.</p>
             </div>
         </div>
     </div>
 
     <div id="page-future" class="page">
-        <div class="container">
-            <h2 class="page-title">Strategic Roadmap</h2>
-            <div style="max-width:800px; margin: 0 auto;" class="rich-text">
-                <p>Our long-term architectural projections define clear targets to establishing Indian engineering powerhouses within international desktop spaces.</p>
-                
-                <div style="margin:40px 0;">
-                    <h3 style="color:#b89430; text-transform:uppercase; margin-bottom:10px;">Phase 1: Solidifying Engine Workspaces</h3>
-                    <p>Polishing out physical properties within our Godot projects, ensuring full control optimization loops for stable deployment configurations across base level graphics arrays.</p>
-                </div>
-
-                <div style="margin:40px 0; border-top: 1px solid #222; padding-top:20px;">
-                    <h3 style="color:#d62828; text-transform:uppercase; margin-bottom:10px;">Phase 2: Full Console Licensing</h3>
-                    <p>Acquiring complete SDK operational access for next-gen home hardware ecosystems, allowing MSP titles to transition natively into worldwide living rooms.</p>
-                </div>
-
-                <div style="margin:40px 0; border-top: 1px solid #222; padding-top:20px;">
-                    <h3 style="color:#ffffff; text-transform:uppercase; margin-bottom:10px;">Phase 3: Large-Scale IPs</h3>
-                    <p>Scaling internal asset pipelines to manage heavy long-form mechanical projects without sacrificing design integrity or atmospheric value assets.</p>
-                </div>
+        <div class="container" style="max-width: 900px;">
+            <h2 class="page-title">Operational Roadmap</h2>
+            <div class="spec-item">
+                <h3>Block Q3 - July Window <span>Upcoming</span></h3>
+                <p style="text-transform: none; color: #aaa; font-size: 15px; margin-top: 5px;">Initiate public deployment queues and validation sequences for Silent Noise Chapter 1: The Park Shift across distributed platform channels.</p>
+            </div>
+            <div class="spec-item">
+                <h3>Block Q4 - Winter Phase <span>Planned</span></h3>
+                <p style="text-transform: none; color: #aaa; font-size: 15px; margin-top: 5px;">Begin engine initialization passes on Project Speed Up framework matrices, expanding native platform optimization arrays.</p>
             </div>
         </div>
     </div>
 
     <div id="page-press" class="page">
-        <div class="container">
-            <h2 class="page-title">Media & Press Hub</h2>
-            <div class="grid-2">
-                <div>
-                    <h3 style="text-transform:uppercase; margin-bottom:15px; color:#fff;">Reviewer Key Requests</h3>
-                    <p style="color:#aaa; font-size:14px; line-height:1.6; margin-bottom:25px;">
-                        Submit verification arrays to request testing review keys or media press packages.
-                    </p>
-                    <p style="color:#b89430; font-weight:bold; font-size:14px;">
-                        Direct Communications: <br>
-                        <span style="color:#fff; font-family:monospace;">mspgames.official@gmail.com</span>
-                    </p>
-                </div>
+        <div class="container" style="max-width: 900px;">
+            <h2 class="page-title">Press Matrix Kit</h2>
+            <div class="rich-text">
+                <p>Access high-definition production snapshots, official logotypes, core identity files, and brand layout criteria for editorial review allocations.</p>
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn" onclick="alert('ARCHIVE ROUTE ENCRYPTED: Press database sync down complete.')">Download Production Asset Kit (.ZIP)</button>
+            </div>
+        </div>
+    </div>
 
-                <div class="form-panel">
-                    <form action="mailto:mspgames.official@gmail.com" method="post" enctype="text/plain">
-                        <div class="form-group">
-                            <label>Channel Name</label>
-                            <input type="text" name="Channel Name" required placeholder="e.g., IGN, YouTube Channel Name">
-                        </div>
-                        <div class="form-group">
-                            <label>Request Variable Type</label>
-                            <select name="Request Type">
-                                <option value="Press Kit Access">Full Digital Asset Press Kit</option>
-                                <option value="Silent Noise Key">Silent Noise Review Key</option>
-                                <option value="Speed Up Access">Speed Up Track Key</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn" style="width:100%;">Transmit Request Form</button>
-                    </form>
-                </div>
+    <div id="page-support" class="page">
+        <div class="container" style="max-width: 900px;">
+            <h2 class="page-title">MSP Support Grid</h2>
+            <p class="card-desc" style="margin-bottom: 40px;">Experiencing platform validation drops, execution runtime errors, or billing configuration drops? File a system query packet directly with the MSP Engineering Desk.</p>
+            
+            <div class="form-panel">
+                <form onsubmit="event.preventDefault(); alert('TICKET BROADCASTED: Support engineers notified.'); this.reset();">
+                    <div class="form-group">
+                        <label>Player Designation / Name</label>
+                        <input type="text" required placeholder="ENTER DESIGNATION...">
+                    </div>
+                    <div class="form-group">
+                        <label>Platform Environment</label>
+                        <select style="width: 100%; background: #000000; border: 2px solid #222; padding: 15px; color: #fff; font-size: 14px;">
+                            <option>DESKTOP / PC MATRIX</option>
+                            <option>ANDROID MOBILE ARCHITECTURE</option>
+                            <option>APPLE iOS LANDSCAPE</option>
+                            <option>TABLET RUNTIME APPARATUS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fault Vector / Incident Description</label>
+                        <textarea rows="5" required style="width: 100%; background: #000000; border: 2px solid #222; padding: 15px; color: #fff; font-size: 14px;" placeholder="DESCRIBE INCIDENT PARAMETERS IN DETAIL..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Broadcast Incident Ticket</button>
+                </form>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 MSP GAMES. ALL RIGHTS RESERVED. DRAGON THEME ALPHA BUILD.</p>
+        &copy; 2026 MSP GAMES. ALL Rights RESERVED.
     </footer>
 
     <script>
-        function switchPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.classList.remove('active-page'));
-            
-            document.getElementById('page-' + pageId).classList.add('active-page');
-            
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            const activeNav = document.getElementById('nav-' + pageId);
-            if(activeNav) activeNav.classList.add('active');
+        /* --- APPLICATION PLATFORM CORE ROUTINES --- */
+        let ytPlayer = null;
+        let activeVideoIndex = 0;
+        
+        const contentMatrix = [
+            { id: "XwT-B_mG8_0", title: "Project Speed Up<br>Announcement", tag: "High-Octane Custom Engineering Physics Layouts" },
+            { id: "2g2S-W5wY20", title: "Silent Noise<br>Prologue", tag: "Atmospheric Horror & High-Octane Action" },
+            { id: "M7lc1UVf-VE", title: "Launch Teaser<br>Production Log", tag: "Live Operational Deployment Streams" }
+        ];
 
-            window.scrollTo({top: 0});
+        let currentCarouselPointer = 0;
+        let automaticSlideEngine = null;
+
+        window.addEventListener('load', () => {
+            initializeAutomaticCarouselEngine();
+        });
+
+        function switchPage(targetPageId) {
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            
+            document.querySelectorAll('.page').forEach(pageBlock => {
+                pageBlock.classList.remove('active-page');
+            });
+            
+            const selectedPage = document.getElementById('page-' + targetPageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active-page');
+            }
+
+            document.querySelectorAll('nav a').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            
+            const activeLink = document.getElementById('nav-' + targetPageId);
+            if (activeLink) activeLink.classList.add('active');
+
+            const mobileNavLinks = document.getElementById('navLinks');
+            if (mobileNavLinks) mobileNavLinks.classList.remove('mobile-open');
+
+            if (targetPageId === 'home' && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                ytPlayer.playVideo();
+            } else if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+                ytPlayer.pauseVideo();
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('mobile-open');
+        }
+
+        /* --- YOUTUBE BACKBONE DRIVER INTEGRATION --- */
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('rsHomePlayer', {
+                videoId: contentMatrix[activeVideoIndex].id,
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'showinfo': 0,
+                    'rel': 0,
+                    'loop': 1,
+                    'playlist': contentMatrix[activeVideoIndex].id,
+                    'mute': 1,
+                    'playsinline': 1,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': (event) => { event.target.playVideo(); }
+                }
+            });
+        }
+
+        function userSelectVideo(videoIndex) {
+            activeVideoIndex = videoIndex;
+            
+            document.querySelectorAll('.switcher-btn').forEach((tab, index) => {
+                tab.classList.toggle('active', index === videoIndex);
+            });
+
+            if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+                ytPlayer.loadVideoById({
+                    videoId: contentMatrix[videoIndex].id,
+                    playlist: contentMatrix[videoIndex].id
+                });
+            }
+
+            document.getElementById('heroDisplayTitle').innerHTML = contentMatrix[videoIndex].title;
+            document.getElementById('heroDisplayTag').innerText = contentMatrix[videoIndex].tag;
+        }
+
+        /* --- CAROUSEL LOOPS ENGINE --- */
+        function initializeAutomaticCarouselEngine() {
+            automaticSlideEngine = setInterval(() => {
+                executeCarouselSlideShift(1);
+            }, 6000);
+        }
+
+        function manualMoveCarousel(directionMultiplier) {
+            clearInterval(automaticSlideEngine);
+            executeCarouselSlideShift(directionMultiplier);
+            initializeAutomaticCarouselEngine();
+        }
+
+        function executeCarouselSlideShift(directionMultiplier) {
+            const trackElement = document.getElementById('posterTrack');
+            const totalSlideElements = trackElement.children.length;
+            
+            currentCarouselPointer = (currentCarouselPointer + directionMultiplier + totalSlideElements) % totalSlideElements;
+            trackElement.style.transform = `translateX(-${currentCarouselPointer * 100}%)`;
+        }
+
+        /* --- BROWSER REALTIME NOTIFICATION ENGINE --- */
+        function triggerBrowserSubscription() {
+            const playerEmail = document.getElementById('newsletterEmail').value.trim();
+            if(!playerEmail) {
+                alert("FAULT: Subsystem demands structural email coordinates to open communication lines.");
+                return;
+            }
+
+            if (!("Notification" in window)) {
+                alert("PLATFORM FAULT: This specific browser application framework lacks modern notification distribution matrices.");
+                return;
+            }
+
+            Notification.requestPermission().then(accessStatus => {
+                if (accessStatus === "granted") {
+                    alert("PROTOCOL LOCKED: Access metrics authorized! Broadcasting confirmation node array...");
+                    
+                    // Trigger a native browser layout notification vector
+                    new Notification("MSP GAMES SYSTEM DISPATCH", {
+                        body: "Communication nodes configured. You will receive direct browser notifications for title updates.",
+                        icon: "https://cdn.discordapp.com/attachments/1479458083255357462/1517816574688366622/MSP_Games.jpg"
+                    });
+                } else {
+                    alert("ACCESS DENIED: Direct browser stream protocol rejected by interface settings.");
+                }
+            });
         }
     </script>
 </body>
