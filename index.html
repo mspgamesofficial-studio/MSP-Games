@@ -588,26 +588,61 @@
         </div>
 
         <!-- GAME 1: SILENT NOISE SHOWCASE -->
-        <div class="game-showcase-block">
-            <div class="sticky-showcase-container">
-                <div class="video-background">
-                    <!-- PASTE SILENT NOISE YOUTUBE TRAILER ID BELOW -->
-                    <iframe src="https://youtu.be/bie5dD5q1es?si=zYtZNSFnD8anf794" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+       <!-- GAME SHOWCASE: SILENT NOISE -->
+<div class="game-showcase-block">
+    <div class="sticky-showcase-container">
+        <div class="video-background">
+            <!-- Corrected YouTube Embed URL for Muted Autoplay -->
+            <iframe 
+                id="silent-noise-trailer"
+                src="https://www.youtube.com/embed/bie5dD5q1es?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=bie5dD5q1es&controls=0&showinfo=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        <div class="showcase-overlay-content">
+            <div class="showcase-game-card">
+                <h2 style="font-size: 40px; font-weight: 900;">SILENT NOISE</h2>
+                <div class="platform-badges">
+                    <span class="badge">PC</span><span class="badge">STEAM</span><span class="badge">EPIC GAMES</span><span class="badge">ITCH.IO</span><span class="badge">STEAM DECK</span>
                 </div>
-                <div class="showcase-overlay-content">
-                    <div class="showcase-game-card">
-                        <h2 style="font-size: 40px; font-weight: 900;">SILENT NOISE</h2>
-                        <div class="platform-badges">
-                            <span class="badge">PC</span><span class="badge">STEAM</span><span class="badge">EPIC GAMES</span><span class="badge">ITCH.IO</span><span class="badge">STEAM DECK</span>
-                        </div>
-                        <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">Step into a dark, psychological nightmare where every sound matters. Uncover terrifying secrets hidden in plain sight.</p>
-                        <div style="display: flex; gap: 12px;">
-                            <a onclick="openGamePage('silent-noise')" class="btn">Learn More</a>
-                            <a onclick="switchPage('press')" class="btn btn-outline">Watch Trailer</a>
-                        </div>
-                    </div>
+                <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">
+                    Step into a dark, psychological nightmare where every sound matters. Uncover terrifying secrets hidden in plain sight.
+                </p>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <a onclick="openGamePage('silent-noise')" class="btn">Learn More</a>
+                    <button type="button" onclick="playSilentNoiseTrailer()" class="btn btn-outline">Watch Trailer 🔊</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add or update script tag near </body> -->
+<script>
+    let silentNoisePlayer;
+
+    // Extend or define YouTube API ready function
+    function onYouTubeIframeAPIReady() {
+        silentNoisePlayer = new YT.Player('silent-noise-trailer', {
+            events: {
+                'onReady': (event) => {
+                    event.target.mute();
+                    event.target.playVideo();
+                }
+            }
+        });
+    }
+
+    function playSilentNoiseTrailer() {
+        if (silentNoisePlayer && typeof silentNoisePlayer.unMute === 'function') {
+            silentNoisePlayer.unMute();
+            silentNoisePlayer.setVolume(100);
+            silentNoisePlayer.seekTo(0);
+            silentNoisePlayer.playVideo();
+        }
+    }
+</script>
             <!-- SILENT NOISE COMMUNITY GRID -->
             <div class="grid-section">
                 <div class="section-header">SILENT NOISE HIGHLIGHTS</div>
@@ -645,83 +680,167 @@
         </div>
 
         <!-- GAME 2: SPEED UP SHOWCASE -->
-        <div class="game-showcase-block">
-            <div class="sticky-showcase-container">
-                <div class="video-background">
-                    <!-- PASTE SPEED UP YOUTUBE TRAILER ID BELOW -->
-                    <iframe src="https://youtu.be/-gsg3m60HCE?si=SbX1Vca6SVcOV39Y" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        <!-- GAME 3: SPEED UP ONLINE SHOWCASE -->
+<div class="game-showcase-block">
+    <div class="sticky-showcase-container">
+        <div class="video-background">
+            <!-- Corrected YouTube Embed URL for Muted Autoplay -->
+            <iframe 
+                id="trailer-iframe"
+                src="https://www.youtube.com/embed/-gsg3m60HCE?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=-gsg3m60HCE&controls=0&showinfo=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        <div class="showcase-overlay-content">
+            <div class="showcase-game-card">
+                <h2 style="font-size: 40px; font-weight: 900;">SPEED UP ONLINE</h2>
+                <div class="platform-badges">
+                    <span class="badge">PC</span><span class="badge">MSP LAUNCHER</span>
                 </div>
-                <div class="showcase-overlay-content">
-                    <div class="showcase-game-card">
-                        <h2 style="font-size: 40px; font-weight: 900;">SPEED UP</h2>
-                        <div class="platform-badges">
-                            <span class="badge">PC</span><span class="badge">STEAM</span><span class="badge">EPIC GAMES</span>
-                        </div>
-                        <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">High-speed street racing redefined. Custom builds, intense law enforcement chases, and open roads await.</p>
-                        <div style="display: flex; gap: 12px;">
-                            <a onclick="openGamePage('speed-up')" class="btn">Learn More</a>
-                            <a onclick="switchPage('press')" class="btn btn-outline">Watch Trailer</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- SPEED UP COMMUNITY GRID -->
-            <div class="grid-section">
-                <div class="section-header">SPEED UP HIGHLIGHTS</div>
-                <div class="insta-grid">
-                    <div class="insta-card" style="background-image: url('https://cdn.imageurlgenerator.com/uploads/c1e929c4-bade-4bee-a31a-19b47046b63f.png');">
-                        <div class="insta-card-overlay"></div>
-                        <div class="insta-card-content">
-                            <div class="insta-card-title">GARAGE SYSTEM</div>
-                            <a onclick="openGamePage('speed-up')" class="btn" style="padding: 8px 15px;">EXPLORE</a>
-                        </div>
-                    </div>
-                    <div class="insta-card" style="background-image: url('https://cdn.imageurlgenerator.com/uploads/77969d6d-a734-4b9b-b968-4338df335d0a.png');">
-                        <div class="insta-card-overlay"></div>
-                        <div class="insta-card-content">
-                            <div class="insta-card-title">MAP REVEAL</div>
-                            <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">VIEW MAP</a>
-                        </div>
-                    </div>
-                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/QR27DNcnrY9.png');">
-                        <div class="insta-card-overlay"></div>
-                        <div class="insta-card-content">
-                            <div class="insta-card-title">SOUNDTRACK</div>
-                            <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">LISTEN</a>
-                        </div>
-                    </div>
-                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/QR27DNcnrY9.png');">
-                        <div class="insta-card-overlay"></div>
-                        <div class="insta-card-content">
-                            <div class="insta-card-title">MEDIA KIT</div>
-                            <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">DOWNLOAD</a>
-                        </div>
-                    </div>
+                <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">
+                    Take the race online. Form crews, compete in global high-stakes events, and rule the underground circuit.
+                </p>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <a onclick="openGamePage('speed-up-online')" class="btn">Learn More</a>
+                    <button type="button" onclick="playTrailerWithAudio()" class="btn btn-outline">Watch Trailer 🔊</button>
+                    <a href="YOUR_LAUNCHER_DOWNLOAD_LINK_HERE" class="btn btn-outline" download>Get Launcher</a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- GAME 3: SPEED UP ONLINE SHOWCASE -->
-        <div class="game-showcase-block">
-            <div class="sticky-showcase-container">
-                <div class="video-background">
-                    <!-- PASTE SPEED UP ONLINE YOUTUBE TRAILER ID BELOW -->
-                    <iframe src="https://youtu.be/-gsg3m60HCE?si=SbX1Vca6SVcOV39Y" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+<!-- YouTube API Script (Add before </body>) -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('trailer-iframe', {
+            events: {
+                'onReady': (event) => {
+                    event.target.mute();
+                    event.target.playVideo();
+                }
+            }
+        });
+    }
+
+    function playTrailerWithAudio() {
+        if (player && typeof player.unMute === 'function') {
+            player.unMute();
+            player.setVolume(100);
+            player.seekTo(0);
+            player.playVideo();
+        }
+    }
+</script>
+            <!-- SPEED UP COMMUNITY GRID -->
+<!-- SPEED UP STUDIO UPDATES / DEV LOGS GRID -->
+<div class="grid-section">
+    <div class="section-header">SPEED UP STUDIO UPDATES</div>
+    <div class="insta-grid">
+        
+        <!-- UPDATE CARD 1: GARAGE SYSTEM -->
+        <div class="insta-card" style="background-image: url('https://cdn.imageurlgenerator.com/uploads/c1e929c4-bade-4bee-a31a-19b47046b63f.png');">
+            <div class="insta-card-overlay"></div>
+            <div class="insta-card-content">
+                <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">DEV LOG #04</div>
+                <div class="insta-card-title">GARAGE & TUNING OVERHAUL</div>
+                <button type="button" onclick="openDevLog('garage')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+            </div>
+        </div>
+
+        <!-- UPDATE CARD 2: MAP REVEAL -->
+        <div class="insta-card" style="background-image: url('https://cdn.imageurlgenerator.com/uploads/77969d6d-a734-4b9b-b968-4338df335d0a.png');">
+            <div class="insta-card-overlay"></div>
+            <div class="insta-card-content">
+                <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">WORLD REVEAL</div>
+                <div class="insta-card-title">EXPLORING THE CITY MAP</div>
+                <button type="button" onclick="openDevLog('map')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+            </div>
+        </div>
+
+        <!-- UPDATE CARD 3: SOUNDTRACK -->
+        <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/QR27DNcnrY9.png');">
+            <div class="insta-card-overlay"></div>
+            <div class="insta-card-content">
+                <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">AUDIO DEEP DIVE</div>
+                <div class="insta-card-title">OFFICIAL SOUNDTRACK REVEAL</div>
+                <button type="button" onclick="openDevLog('soundtrack')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+            </div>
+        </div>
+
+        <!-- UPDATE CARD 4: ALPHA ROADMAP -->
+        <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/QR27DNcnrY9.png');">
+            <div class="insta-card-overlay"></div>
+            <div class="insta-card-content">
+                <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">ROADMAP</div>
+                <div class="insta-card-title">EARLY ACCESS ROADMAP</div>
+                <button type="button" onclick="openDevLog('roadmap')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+       <!-- GAME 3: SPEED UP ONLINE SHOWCASE -->
+<div class="game-showcase-block">
+    <div class="sticky-showcase-container">
+        <div class="video-background">
+            <!-- Corrected YouTube Embed URL for Muted Autoplay -->
+            <iframe 
+                id="trailer-iframe"
+                src="https://www.youtube.com/embed/-gsg3m60HCE?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=-gsg3m60HCE&controls=0&showinfo=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        <div class="showcase-overlay-content">
+            <div class="showcase-game-card">
+                <h2 style="font-size: 40px; font-weight: 900;">SPEED UP ONLINE</h2>
+                <div class="platform-badges">
+                    <span class="badge">PC</span><span class="badge">MSP LAUNCHER</span>
                 </div>
-                <div class="showcase-overlay-content">
-                    <div class="showcase-game-card">
-                        <h2 style="font-size: 40px; font-weight: 900;">SPEED UP ONLINE</h2>
-                        <div class="platform-badges">
-                            <span class="badge">PC</span><span class="badge">MSP LAUNCHER</span>
-                        </div>
-                        <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">Take the race online. Form crews, compete in global high-stakes events, and rule the underground circuit.</p>
-                        <div style="display: flex; gap: 12px;">
-                            <a onclick="openGamePage('speed-up-online')" class="btn">Learn More</a>
-                            <a onclick="switchPage('launcher')" class="btn btn-outline">Get Launcher</a>
-                        </div>
-                    </div>
+                <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">
+                    Take the race online. Form crews, compete in global high-stakes events, and rule the underground circuit.
+                </p>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <a onclick="openGamePage('speed-up-online')" class="btn">Learn More</a>
+                    <button type="button" onclick="playTrailerWithAudio()" class="btn btn-outline">Watch Trailer 🔊</button>
+                    <a href="YOUR_LAUNCHER_DOWNLOAD_LINK_HERE" class="btn btn-outline" download>Get Launcher</a>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- YouTube API Script (Add before </body>) -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('trailer-iframe', {
+            events: {
+                'onReady': (event) => {
+                    event.target.mute();
+                    event.target.playVideo();
+                }
+            }
+        });
+    }
+
+    function playTrailerWithAudio() {
+        if (player && typeof player.unMute === 'function') {
+            player.unMute();
+            player.setVolume(100);
+            player.seekTo(0);
+            player.playVideo();
+        }
+    }
+</script>
             <!-- SPEED UP ONLINE COMMUNITY GRID -->
             <div class="grid-section">
                 <div class="section-header">SPEED UP ONLINE HIGHLIGHTS</div>
