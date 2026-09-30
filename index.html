@@ -589,6 +589,7 @@
 
         <!-- GAME 1: SILENT NOISE SHOWCASE -->
        <!-- GAME SHOWCASE: SILENT NOISE -->
+<div cla<!-- GAME SHOWCASE BLOCK: SILENT NOISE -->
 <div class="game-showcase-block">
     <div class="sticky-showcase-container">
         <div class="video-background">
@@ -610,8 +611,8 @@
                     Step into a dark, psychological nightmare where every sound matters. Uncover terrifying secrets hidden in plain sight.
                 </p>
                 <div style="display: flex; gap: 12px; align-items: center;">
-                    <a onclick="openGamePage('silent-noise')" class="btn">Learn More</a>
-                    <button type="button" onclick="playSilentNoiseTrailer()" class="btn btn-outline">Watch Trailer 🔊</button>
+                    <button type="button" onclick="openGamePage('silent-noise')" class="btn">Learn More</button>
+                    <button type="button" onclick="playSilentNoiseTrailer()" class="btn btn-outline">Watch Trailer </button>
                 </div>
             </div>
         </div>
@@ -647,10 +648,10 @@
             <div class="grid-section">
                 <div class="section-header">SILENT NOISE HIGHLIGHTS</div>
                 <div class="insta-grid">
-                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/0T1bgFlHLZU.png');">
+                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/zbMQnVZsndr.png');">
                         <div class="insta-card-overlay"></div>
                         <div class="insta-card-content">
-                            <div class="insta-card-title">PROLOGUE DEMO</div>
+                            <div class="insta-card-title">Silent Noise : The Park Shift Prologue </div>
                             <a onclick="openGamePage('silent-noise')" class="btn" style="padding: 8px 15px;">PLAY NOW</a>
                         </div>
                     </div>
@@ -661,14 +662,14 @@
                             <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">READ MORE</a>
                         </div>
                     </div>
-                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/0T1bgFlHLZU.png');">
+                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/Hod8nsqq9hg.png');">
                         <div class="insta-card-overlay"></div>
                         <div class="insta-card-content">
                             <div class="insta-card-title">CONCEPT ART</div>
                             <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">VIEW ART</a>
                         </div>
                     </div>
-                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/view/1314464720');">
+                    <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/EIoCTd81qbd.png');">
                         <div class="insta-card-overlay"></div>
                         <div class="insta-card-content">
                             <div class="insta-card-title">PRESS KIT</div>
@@ -696,14 +697,14 @@
             <div class="showcase-game-card">
                 <h2 style="font-size: 40px; font-weight: 900;">SPEED UP ONLINE</h2>
                 <div class="platform-badges">
-                    <span class="badge">PC</span><span class="badge">MSP LAUNCHER</span>
+                    <span class="badge">PC</span><span class="badge">Nitra Launcher</span>
                 </div>
                 <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">
                     Take the race online. Form crews, compete in global high-stakes events, and rule the underground circuit.
                 </p>
                 <div style="display: flex; gap: 12px; align-items: center;">
                     <a onclick="openGamePage('speed-up-online')" class="btn">Learn More</a>
-                    <button type="button" onclick="playTrailerWithAudio()" class="btn btn-outline">Watch Trailer 🔊</button>
+                    <button type="button" onclick="playTrailerWithAudio()" class="btn btn-outline">Watch Trailer </button>
                     <a href="YOUR_LAUNCHER_DOWNLOAD_LINK_HERE" class="btn btn-outline" download>Get Launcher</a>
                 </div>
             </div>
@@ -878,15 +879,16 @@
         </div>
 
         <!-- NEWSLETTER SUBSCRIPTION -->
-        <div class="newsletter-section">
-            <h2 style="font-weight: 900; font-size: 28px;">SUBSCRIBE TO NEWSLETTERS</h2>
-            <p style="font-size: 11px; color: #888; margin-top: 5px;">Get the latest updates on releases, betas, and development leaks.</p>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
-                <input type="email" placeholder="ENTER YOUR EMAIL ADDRESS" class="newsletter-input" required>
-                <button type="submit" class="btn">SUBSCRIBE</button>
-            </form>
-        </div>
-    </div>
+       <div class="newsletter-section">
+    <h2 style="font-weight: 900; font-size: 28px;">SUBSCRIBE TO NEWSLETTERS</h2>
+    <p style="font-size: 11px; color: #888; margin-top: 5px;">Get the latest updates on releases, betas, and development leaks.</p>
+    
+    <!-- Formspree Endpoint Link yahan add karein -->
+    <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="email" name="email" placeholder="ENTER YOUR EMAIL ADDRESS" class="newsletter-input" required>
+        <button type="submit" class="btn">SUBSCRIBE</button>
+    </form>
+</div>
 
     <!-- ========================================== -->
     <!-- 2. GAME DEDICATED PAGE (DYNAMIC) -->
@@ -910,23 +912,32 @@
                     <p>Experience an immersive world crafted with meticulous attention to detail. Every lighting sequence, sound cue, and environment is built to pull you deep into the mystery.</p>
                 </div>
                 <div class="zigzag-image">
-                    <img src="https://cdn.corenexis.com/f/0T1bgFlHLZU.png" alt="Gameplay 1">
+                    <img src="https://cdn.corenexis.com/f/SUkTNv35VLc.png" alt="Gameplay 1">
                 </div>
             </div>
 
             <!-- Row 2: Image Left, Text Right -->
             <div class="zigzag-row reverse">
                 <div class="zigzag-text">
-                    <h3>NEXT-GEN MECHANICS</h3>
-                    <p>Designed for smooth responsiveness and intense interactions. Whether escaping dark entities or burning rubber on asphalt, precision mechanics keep you in total control.</p>
+                    <h3>Cinamatic Exprience</h3>
+                    <p>Designed for the players who loves cinamatic experiences. Whether escaping dark entities or fighting yourself, unique mechanism that keep you engage.</p>
                 </div>
                 <div class="zigzag-image">
-                    <img src="https://cdn.corenexis.com/f/QR27DNcnrY9.png" alt="Gameplay 2">
+                    <img src="https://cdn.corenexis.com/f/trgc1zJ4qW3.png" alt="Gameplay 2">
                 </div>
             </div>
         </div>
     </div>
-
+            <!-- Row 3: Image Right, Text Left -->
+            <div class="zigzag-row">
+                <div class="zigzag-text">
+                    <h3>Highest quality </h3>
+                    <p>Experience an immersive world crafted with meticulous attention to detail with highest graphics as possible.</p>
+                </div>
+                <div class="zigzag-image">
+                    <img src="https://cdn.corenexis.com/f/c1gyb0uqLPu.png" alt="Gameplay 3">
+                </div>
+            </div>
     <!-- ========================================== -->
     <!-- 3. GAMES CATALOGUE PAGE -->
     <!-- ========================================== -->
