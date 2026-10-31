@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSP Games</title>
+    
+    <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/43fTq3Qk/MSP-Games-Logo.webp">
+    
+    <!-- External CSS Linked -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+    <!-- FIXED TOP HEADER -->
+    <header>
+        <div class="header-left">
+            <div class="logo-wrapper" onclick="switchPage('home')">
+                <img src="https://i.postimg.cc/43fTq3Qk/MSP-Games-Logo.webp alt="MSP Games Logo" class="logo-image">
+            </div>
+
+            <nav>
+                <div class="nav-links">
+                    <a onclick="switchPage('home')" id="nav-home" class="active">Home</a>
+                    
+                    <!-- GAMES DROPDOWN -->
+                    <div class="nav-dropdown">
+                        <a onclick="switchPage('games')" id="nav-games" class="dropdown-trigger">
+                            Games <span style="font-size: 9px; margin-left: 5px;">∨</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-header">
+                                <span>FEATURED TITLES</span>
+                                <a onclick="switchPage('games')" style="color:#d62828; cursor:pointer;">View All →</a>
+                            </div>
+                            <div class="dropdown-grid">
+                                <div class="dropdown-card" onclick="openGamePage('silent-noise')">
+                                    <img src="https://i.postimg.cc/nznrzT15/Silent-Noise-banner-yt-final-(1).png" alt="Silent Noise">
+                                    <div class="dropdown-card-title">SILENT NOISE</div>
+                                </div>
+                                <div class="dropdown-card" onclick="openGamePage('speed-up')">
+                                    <img src="https://cdn.corenexis.com/f/z522u92yqo7.png" alt="Speed Up">
+                                    <div class="dropdown-card-title">Speed Up</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a onclick="switchPage('about')">About Us</a>
+                    <a onclick="switchPage('press')">Press & Media</a>
+                    <a onclick="switchPage('support')">Support</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- RIGHT ACTION SECTION -->
+        <div class="header-right">
+            <a onclick="switchPage('launcher')" class="btn-launcher">Get Launcher</a>
+            
+            <button class="icon-btn" onclick="toggleSearch()" title="Search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+
+            <div class="user-dropdown">
+                <button class="icon-btn" title="Account">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </button>
+                <div class="user-menu">
+                    <a href="#">Sign In</a>
+                    <a href="#">Sign Up</a>
+                    <a onclick="switchPage('support')">Help</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEARCH OVERLAY MODAL -->
+    <div id="searchModal" class="search-modal">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <span style="font-size: 12px; color: #888; font-weight: 800;">LIVE SEARCH</span>
+            <button onclick="toggleSearch()" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">✕</button>
+        </div>
+        
+        <input type="text" id="searchInput" class="search-input" placeholder="Search games, news, updates..." oninput="performSearch()">
+        <p style="margin-top: 10px; color: #666; font-size: 11px;">Press ESC or click ✕ to exit</p>
+
+        <!-- Dynamic Search Results List -->
+        <div id="searchResults" class="search-results-list" style="margin-top: 30px; max-height: 60vh; overflow-y: auto;">
+            <!-- Search results will appear here live -->
+        </div>
+    </div>
+    <!-- ========================================== -->
+    <!-- 1. HOME PAGE -->
+    <!-- ========================================== -->
+    <div id="page-home" class="page active-page">
+        
+        <!-- HERO SLIDER -->
+        <div class="hero-slider-container">
+            <div class="hero-slide active" id="hero-slide-0" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%), url('https://i.postimg.cc/nznrzT15/Silent-Noise-banner-yt-final-(1).png');">
+                <div class="hero-content">
+                    <h1 class="hero-title">Silent Noise<br>The Park Shift</h1>
+                    <div class="hero-subtitle">Story Driven Psychological Horror</div>
+                    <div class="hero-actions">
+                        <a onclick="openGamePage('silent-noise')" class="btn">Explore Game</a>
+                        <a onclick="switchPage('press')" class="btn btn-outline">Watch Trailer</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide" id="hero-slide-1" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%), url('https://i.postimg.cc/C5GRJ14R/Speed-Up-midnight-metro-thumbnail-(2).png');">
+                <div class="hero-content">
+                    <h1 class="hero-title">Speed Up</h1>
+                    <div class="hero-subtitle">Next-Gen Open World Experience</div>
+                    <div class="hero-actions">
+                        <a onclick="openGamePage('speed-up')" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide" id="hero-slide-2" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%), url('https://i.postimg.cc/Jz1pNHQ3/Speed-Up-online-webiste-pic.png');">
+                <div class="hero-content">
+                    <h1 class="hero-title">Speed Up Online</h1>
+                    <div class="hero-subtitle">Race with friends in illegal streets</div>
+                    <div class="hero-actions">
+                        <a onclick="switchPage('launcher')" class="btn">Get Launcher</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-controls">
+                <button class="pause-btn" onclick="toggleSliderPause()">❚❚</button>
+                <div class="slider-indicators">
+                    <div class="indicator active" onclick="userSelectSlide(0)"><div class="progress-bar"></div></div>
+                    <div class="indicator" onclick="userSelectSlide(1)"><div class="progress-bar"></div></div>
+                    <div class="indicator" onclick="userSelectSlide(2)"><div class="progress-bar"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME SHOWCASE: SILENT NOISE -->
+        <div class="game-showcase-block">
+            <div class="sticky-showcase-container">
+                <div class="video-background">
+                    <iframe id="silent-noise-trailer" src= "https://www.youtube.com/embed/r3xPH_bZbck?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=r3xPH_bZbck&controls=0&showinfo=0" frameborder="0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+                </div>
+                <div class="showcase-overlay-content">
+                    <div class="showcase-game-card">
+                        <h2 style="font-size: 40px; font-weight: 900;">SILENT NOISE</h2>
+                        <div class="platform-badges">
+                            <span class="badge">PC</span><span class="badge">STEAM</span><span class="badge">EPIC GAMES</span><span class="badge">ITCH.IO</span><span class="badge">STEAM DECK</span>
+                        </div>
+                        <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">
+                            Step into a dark, psychological nightmare where every sound matters. Uncover terrifying secrets hidden in plain sight.
+                        </p>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button type="button" onclick="openGamePage('silent-noise')" class="btn">Learn More</button>
+                            <button type="button" onclick="playSilentNoiseTrailer()" class="btn btn-outline">Watch Trailer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SILENT NOISE HIGHLIGHTS GRID -->
+        <div class="grid-section">
+            <div class="section-header">SILENT NOISE HIGHLIGHTS</div>
+            <div class="insta-grid">
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/zbMQnVZsndr.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">Silent Noise : The Park Shift Prologue</div>
+                        <a href="https://msp-games.itch.io/silentnoiseprologue" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 8px 15px;">PLAY NOW</a>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/0T1bgFlHLZU.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">DEV DIARY #1</div>
+                        <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">READ MORE</a>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/Hod8nsqq9hg.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">CONCEPT ART</div>
+                        <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">VIEW ART</a>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/EIoCTd81qbd.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">PRESS KIT</div>
+                        <a onclick="switchPage('press')" class="btn btn-outline" style="padding: 8px 15px;">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPEED UP STUDIO UPDATES GRID -->
+        <div class="grid-section">
+            <div class="section-header">SPEED UP STUDIO UPDATES</div>
+            <div class="insta-grid">
+                <div class="insta-card" style="background-image: url('https://i.postimg.cc/KjFR4M6f/speed-up-new-ss.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">DEV LOG #04</div>
+                        <div class="insta-card-title">GARAGE & TUNING OVERHAUL</div>
+                        <button type="button" onclick="openDevLog('garage')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://i.postimg.cc/rmMhJhxD/Speed-Up-midnight-metro-poster-insta.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">WORLD REVEAL</div>
+                        <div class="insta-card-title">EXPLORING THE CITY MAP</div>
+                        <button type="button" onclick="openDevLog('map')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/QR27DNcnrY9.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">AUDIO DEEP DIVE</div>
+                        <div class="insta-card-title">OFFICIAL SOUNDTRACK REVEAL</div>
+                        <button type="button" onclick="openDevLog('soundtrack')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://i.postimg.cc/tCxM9VXN/speed-up-ss-7.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div style="font-size: 9px; color: #d62828; font-weight: 800; margin-bottom: 5px;">ROADMAP</div>
+                        <div class="insta-card-title">EARLY ACCESS ROADMAP</div>
+                        <button type="button" onclick="openDevLog('roadmap')" class="btn" style="padding: 8px 15px;">READ UPDATE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME SHOWCASE: SPEED UP ONLINE -->
+        <div class="game-showcase-block">
+            <div class="sticky-showcase-container">
+                <div class="video-background">
+                    <iframe id="trailer-iframe" src="https://www.youtube.com/embed/rV-79SHWD10?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=rV-79SHWD10&controls=0&showinfo=0"" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+                </div>
+                <div class="showcase-overlay-content">
+                    <div class="showcase-game-card">
+                        <h2 style="font-size: 40px; font-weight: 900;">SPEED UP ONLINE</h2>
+                        <div class="platform-badges">
+                            <span class="badge">PC</span><span class="badge">Nitra LAUNCHER</span>
+                        </div>
+                        <p style="font-size: 12px; color: #ccc; margin-bottom: 25px; text-transform: none; line-height: 1.6;">
+                            Take the race online. Form crews, compete in global high-stakes events, and rule the underground circuit.
+                        </p>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <a onclick="openGamePage('speed-up-online')" class="btn">Learn More</a>
+                            <button type="button" onclick="playTrailerWithAudio()" class="btn btn-outline">Watch Trailer 🔊</button>
+                            <a onclick="switchPage('launcher')" class="btn btn-outline">Get Launcher</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPEED UP ONLINE HIGHLIGHTS -->
+        <div class="grid-section">
+            <div class="section-header">SPEED UP ONLINE HIGHLIGHTS</div>
+            <div class="insta-grid">
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/rI87BPMbTsl.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">CREW WARS</div>
+                        <a onclick="openGamePage('speed-up-online')" class="btn" style="padding: 8px 15px;">DETAILS</a>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/rI87BPMbTsl.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">BETA REGISTRATION</div>
+                        <a onclick="switchPage('launcher')" class="btn" style="padding: 8px 15px;">REGISTER</a>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/rI87BPMbTsl.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">LEADERBOARDS</div>
+                        <a onclick="switchPage('launcher')" class="btn btn-outline" style="padding: 8px 15px;">RANKINGS</a>
+                    </div>
+                </div>
+                <div class="insta-card" style="background-image: url('https://cdn.corenexis.com/f/rI87BPMbTsl.png');">
+                    <div class="insta-card-overlay"></div>
+                    <div class="insta-card-content">
+                        <div class="insta-card-title">SERVER STATUS</div>
+                        <a onclick="switchPage('support')" class="btn btn-outline" style="padding: 8px 15px;">CHECK STATUS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEWSLETTER SUBSCRIPTION -->
+        <div class="newsletter-section">
+            <h2 style="font-weight: 900; font-size: 28px;">SUBSCRIBE TO NEWSLETTERS</h2>
+            <p style="font-size: 11px; color: #888; margin-top: 5px;">Get the latest updates on releases, betas, and development leaks.</p>
+            <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="ENTER YOUR EMAIL ADDRESS" class="newsletter-input" required>
+                <button type="submit" class="btn">SUBSCRIBE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. GAME DEDICATED PAGE -->
+    <!-- ========================================== -->
+    <div id="page-game-detail" class="page">
+        <div class="game-banner" id="game-detail-banner">
+            <div class="game-banner-overlay"></div>
+            <div class="game-banner-details">
+                <h1 id="game-detail-title" style="font-size: 48px; font-weight: 900;">GAME TITLE</h1>
+                <div class="platform-badges" id="game-detail-platforms">
+                    <span class="badge">PC</span><span class="badge">STEAM</span><span class="badge">EPIC GAMES</span><span class="badge">ITCH.IO</span><span class="badge">STEAM DECK</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="zigzag-container">
+            <div class="zigzag-row">
+                <div class="zigzag-text">
+                    <h3>ATMOSPHERIC STORYTELLING</h3>
+                    <p>Experience an immersive world crafted with meticulous attention to detail. Every lighting sequence, sound cue, and environment is built to pull you deep into the mystery.</p>
+                </div>
+                <div class="zigzag-image">
+                    <img src="https://cdn.corenexis.com/f/SUkTNv35VLc.png" alt="Gameplay 1">
+                </div>
+            </div>
+
+            <div class="zigzag-row reverse">
+                <div class="zigzag-text">
+                    <h3>Cinematic Experience</h3>
+                    <p>Designed for the players who love cinematic experiences. Whether escaping dark entities or fighting yourself, unique mechanisms keep you engaged.</p>
+                </div>
+                <div class="zigzag-image">
+                    <img src="https://cdn.corenexis.com/f/trgc1zJ4qW3.png" alt="Gameplay 2">
+                </div>
+            </div>
+
+            <div class="zigzag-row">
+                <div class="zigzag-text">
+                    <h3>Highest Quality</h3>
+                    <p>Experience an immersive world crafted with meticulous attention to detail with the highest graphics possible.</p>
+                </div>
+                <div class="zigzag-image">
+                    <img src="https://cdn.corenexis.com/f/c1gyb0uqLPu.png" alt="Gameplay 3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. GAMES CATALOGUE PAGE -->
+    <!-- ========================================== -->
+    <div id="page-games" class="page" style="padding: 100px 8%;">
+        <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 30px;">ALL GAMES</h1>
+        <div class="dropdown-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="dropdown-card" onclick="openGamePage('silent-noise')">
+                <img src="https://cdn.corenexis.com/f/0T1bgFlHLZU.png" style="height: 200px;">
+                <div class="dropdown-card-title" style="font-size: 16px; padding: 15px;">SILENT NOISE</div>
+            </div>
+            <div class="dropdown-card" onclick="openGamePage('speed-up')">
+                <img src="https://cdn.corenexis.com/f/QR27DNcnrY9.png" style="height: 200px;">
+                <div class="dropdown-card-title" style="font-size: 16px; padding: 15px;">SPEED UP</div>
+            </div>
+            <div class="dropdown-card" onclick="openGamePage('speed-up-online')">
+                <img src="https://cdn.corenexis.com/f/rI87BPMbTsl.png" style="height: 200px;">
+                <div class="dropdown-card-title" style="font-size: 16px; padding: 15px;">SPEED UP ONLINE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. EXPANDED ABOUT US PAGE -->
+    <!-- ========================================== -->
+    <div id="page-about" class="page" style="padding: 100px 8%;">
+        <div style="border-bottom: 2px solid #d62828; padding-bottom: 20px; margin-bottom: 40px;">
+            <h1 style="font-size: 42px; font-weight: 900;">ABOUT MSP GAMES</h1>
+            <p style="text-transform: none; color: #aaaaaa; font-size: 14px; margin-top: 8px;">Born To Create Legacy</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 60px;">
+            <div style="background: #0a0a0a; border: 1px solid #222; padding: 30px;">
+                <h3 style="color: #d62828; margin-bottom: 15px; font-weight: 900;">OUR VISION</h3>
+                <p style="text-transform: none; color: #ccc; line-height: 1.7; font-size: 13px;">
+                    At MSP Games, we are an India-based, PC and console-focused multi-genre studio on a mission to build the future of Indian gaming. We build immersive worlds where gameplay meets emotional intensity, breaking standard genre boundaries to construct interactive experiences that leave lasting impacts on gamers worldwide.
+                </p>
+            </div>
+            <div style="background: #0a0a0a; border: 1px solid #222; padding: 30px;">
+                <h3 style="color: #d62828; margin-bottom: 15px; font-weight: 900;">CORE TECHNOLOGY</h3>
+                <p style="text-transform: none; color: #ccc; line-height: 1.7; font-size: 13px;">
+                    Powered by custom Godot 4, volumetric dynamic lighting, photogrammetry texturing, and bespoke binaural spatial audio, our engine setups push visual fidelity to modern AAA standards.
+                </p>
+            </div>
+            <div style="background: #0a0a0a; border: 1px solid #222; padding: 30px;">
+                <h3 style="color: #d62828; margin-bottom: 15px; font-weight: 900;">INDEPENDENT SPIRIT</h3>
+                <p style="text-transform: none; color: #ccc; line-height: 1.7; font-size: 13px;">
+                    We operate with complete creative freedom. Every mechanic, story arc, and visual asset is meticulously handcrafted by passionate developers free from corporate interference.
+                </p>
+            </div>
+        </div>
+
+        <div style="background: #050505; border: 1px solid #151515; padding: 40px; margin-bottom: 40px;">
+            <h2 style="font-size: 24px; font-weight: 900; margin-bottom: 25px; color: #fff;">STUDIO LEADERSHIP & CULTURE</h2>
+            <p style="text-transform: none; color: #aaa; line-height: 1.8; font-size: 13px; max-width: 900px; margin-bottom: 20px;">
+                Founded by Manas Vatsh and co-founded with Daksh Yadav with a vision to create uncompromising titles, MSP Games brings together senior talent in game design, 3D modeling, sound engineering, and backend infrastructure. Our team culture prioritizes innovation, continuous learning, and community feedback.
+            </p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 25px;">
+                <span class="badge" style="padding: 8px 16px; font-size: 11px;">100% REMOTE & GLOBAL</span>
+                <span class="badge" style="padding: 8px 16px; font-size: 11px;">COMMUNITY DRIVEN</span>
+                <span class="badge" style="padding: 8px 16px; font-size: 11px;">Godot 4 TECH</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 5. EXPANDED PRESS & MEDIA PAGE -->
+    <!-- ========================================== -->
+    <div id="page-press" class="page" style="padding: 100px 8%;">
+        <div style="border-bottom: 2px solid #d62828; padding-bottom: 20px; margin-bottom: 30px;">
+            <h1 style="font-size: 42px; font-weight: 900;">PRESS & MEDIA CENTER</h1>
+            <p style="text-transform: none; color: #888; margin-top: 5px;">Official high-res press assets, logos, trailers, and media contact info for journalists and content creators.</p>
+        </div>
+        
+        <div class="press-grid">
+            <div class="press-card">
+                <h3>SILENT NOISE PRESS KIT</h3>
+                <p style="text-transform: none; color: #aaa; font-size: 12px; margin-bottom: 20px;">Includes 4K Screenshots, Key Art, Vector Logos, Fact Sheet, and Game Description.</p>
+                <a href="https://drive.google.com" target="_blank" class="btn">DOWNLOAD KIT (ZIP)</a>
+            </div>
+            <div class="press-card">
+                <h3>SPEED UP PRESS KIT</h3>
+                <p style="text-transform: none; color: #aaa; font-size: 12px; margin-bottom: 20px;">Includes Vehicle Renders, City Map Shots, Gameplay Clips, and Branding Assets.</p>
+                <a href="https://drive.google.com" target="_blank" class="btn">DOWNLOAD KIT (ZIP)</a>
+            </div>
+            <div class="press-card">
+                <h3>SPEED UP ONLINE KIT</h3>
+                <p style="text-transform: none; color: #aaa; font-size: 12px; margin-bottom: 20px;">Includes Multiplayer B-Roll, Crew Crest Assets, Launcher Screenshots, and Press Release.</p>
+                <a href="https://drive.google.com" target="_blank" class="btn">DOWNLOAD KIT (ZIP)</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px; background: #0a0a0a; border: 1px solid #222; padding: 40px;">
+            <h2 style="font-size: 24px; font-weight: 900; margin-bottom: 10px;">REQUEST ACCESS / PRESS INQUIRIES</h2>
+            <p style="text-transform: none; color: #aaa; font-size: 12px; margin-bottom: 25px;">Are you a content creator, reviewer, or journalist? Fill out the key request form or contact us directly.</p>
+            <form style="max-width: 600px;" onsubmit="event.preventDefault(); alert('Press request submitted! Our PR team will verify your credentials.');">
+                <div class="form-group">
+                    <label>OUTLET / CHANNEL NAME</label>
+                    <input type="text" class="form-control" placeholder="e.g. IGN, YouTube Channel, Twitch" required>
+                </div>
+                <div class="form-group">
+                    <label>WORK EMAIL ADDRESS</label>
+                    <input type="email" class="form-control" placeholder="press@youroutlet.com" required>
+                </div>
+                <div class="form-group">
+                    <label>GAME KEY REQUESTED</label>
+                    <select class="form-control">
+                        <option>SILENT NOISE (REVIEW KEY)</option>
+                        <option>SPEED UP (BETA ACCESS)</option>
+                        <option>SPEED UP ONLINE (CREW TEST)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">REQUEST PRESS ACCESS</button>
+            </form>
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #222;">
+                <p style="text-transform: none; color: #aaa; font-size: 12px;">Direct PR Inquiry Email: <a href="mailto:contact@mspgames.com" style="color: #d62828; text-decoration: none; font-weight: bold;">mspgames.official@gmail.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 6. SUPPORT PAGE -->
+    <!-- ========================================== -->
+    <div id="page-support" class="page" style="padding: 100px 8%;">
+        <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 30px;">MSP GAMES SUPPORT</h1>
+        <form style="max-width: 600px;" onsubmit="event.preventDefault(); alert('Support request sent! We will reach out shortly.');">
+            <div class="form-group">
+                <label>FULL NAME</label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>EMAIL ADDRESS</label>
+                <input type="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>GAME / TOPIC</label>
+                <select class="form-control">
+                    <option>SILENT NOISE</option>
+                    <option>SPEED UP</option>
+                    <option>SPEED UP ONLINE</option>
+                    <option>LAUNCHER ISSUE</option>
+                    <option>OTHER</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>MESSAGE</label>
+                <textarea class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">SUBMIT TICKET</button>
+        </form>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 7. EXPANDED GET NITRA LAUNCHER PAGE -->
+    <!-- ========================================== -->
+    <div id="page-launcher" class="page">
+        <div class="launcher-hero">
+            <h1 style="font-size: 56px; font-weight: 900; margin-bottom: 15px; color: #ffffff; text-shadow: 0 0 20px rgba(214, 40, 40, 0.5);">NITRA LAUNCHER</h1>
+            <p style="color: #ccc; max-width: 650px; margin-bottom: 30px; text-transform: none; line-height: 1.7; font-size: 14px;">
+                The official desktop hub for MSP Games. Auto-update titles, manage cloud saves, connect with crews, and launch high-performance online sessions seamlessly.
+            </p>
+            <a href="https://msp-games.itch.io/silentnoiseprologue" class="btn-launcher" style="padding: 18px 45px; font-size: 14px; background: #d62828 !important; border-color: #d62828 !important;" download>DOWNLOAD NITRA LAUNCHER FOR WINDOWS (64-BIT)</a>
+            <p style="font-size: 10px; color: #888; margin-top: 12px; text-transform: none;">Version 1.0.4 | Windows 10/11 Compatible | Direct Installer</p>
+        </div>
+
+        <div style="padding: 80px 8%; background: #050505;">
+            <h2 style="font-size: 28px; font-weight: 900; margin-bottom: 40px; text-align: center; color: #d62828;">WHY USE NITRA LAUNCHER?</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div style="background: #0a0a0a; border: 1px solid #222; padding: 25px;">
+                    <h3 style="font-size: 16px; margin-bottom: 10px;">⚡ LIGHTNING FAST UPDATES</h3>
+                    <p style="text-transform: none; color: #aaa; font-size: 12px; line-height: 1.6;">Delta patching mechanism downloads only modified files, saving bandwidth and get you in-game faster.</p>
+                </div>
+                <div style="background: #0a0a0a; border: 1px solid #222; padding: 25px;">
+                    <h3 style="font-size: 16px; margin-bottom: 10px;">☁️ CLOUD SAVE INTEGRATION</h3>
+                    <p style="text-transform: none; color: #aaa; font-size: 12px; line-height: 1.6;">Your game saves automatically sync across PC devices so you never lose campaign or garage progress.</p>
+                </div>
+                <div style="background: #0a0a0a; border: 1px solid #222; padding: 25px;">
+                    <h3 style="font-size: 16px; margin-bottom: 10px;">🏎️ SPEED UP ONLINE HUBS</h3>
+                    <p style="text-transform: none; color: #aaa; font-size: 12px; line-height: 1.6;">Built-in multiplayer matchmaking, server status tracking, and instant crew tournament invites.</p>
+                </div>
+                <div style="background: #0a0a0a; border: 1px solid #222; padding: 25px;">
+                    <h3 style="font-size: 16px; margin-bottom: 10px;">🛡️ ANTI-CHEAT PROTECTION</h3>
+                    <p style="text-transform: none; color: #aaa; font-size: 12px; line-height: 1.6;">Kernel-level lightweight integrity verification ensures fair racing and cheat-free Leaderboards.</p>
+                </div>
+            </div>
+
+            <!-- SYSTEM REQUIREMENTS -->
+            <div style="margin-top: 60px; background: #0a0a0a; border: 1px solid #222; padding: 40px;">
+                <h3 style="font-size: 20px; font-weight: 900; margin-bottom: 20px;">LAUNCHER SYSTEM REQUIREMENTS</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                    <div>
+                        <h4 style="color: #d62828; margin-bottom: 10px;">MINIMUM</h4>
+                        <ul style="list-style: none; color: #ccc; font-size: 12px; line-height: 2; text-transform: none;">
+                            <li>• OS: Windows 10 (64-bit)</li>
+                            <li>• Memory: 4 GB RAM</li>
+                            <li>• Storage: 250 MB available space</li>
+                            <li>• Internet: Broadband Connection required</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #d62828; margin-bottom: 10px;">RECOMMENDED</h4>
+                        <ul style="list-style: none; color: #ccc; font-size: 12px; line-height: 2; text-transform: none;">
+                            <li>• OS: Windows 11 (64-bit)</li>
+                            <li>• Memory: 8 GB RAM</li>
+                            <li>• Storage: 500 MB SSD space</li>
+                            <li>• Internet: High-Speed Fiber Broadband</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- ========================================== -->
+    <!-- DYNAMIC DEV LOG DETAIL PAGE -->
+    <!-- ========================================== -->
+    <div id="page-devlog-detail" class="page" style="padding: 100px 8%;">
+        <button onclick="switchPage('home')" class="btn btn-outline" style="margin-bottom: 30px;">← BACK TO HOME</button>
+        
+        <!-- Header Banner Image -->
+        <div id="devlog-banner" style="width: 100%; height: 350px; background-size: cover; background-position: center; border: 1px solid #222; margin-bottom: 30px;"></div>
+        
+        <!-- Headlines & Category -->
+        <div id="devlog-category" style="font-size: 11px; color: #d62828; font-weight: 800; letter-spacing: 2px; margin-bottom: 8px;">DEV LOG</div>
+        <h1 id="devlog-title" style="font-size: 38px; font-weight: 900; margin-bottom: 20px;">UPDATE TITLE</h1>
+        
+        <!-- First Text Block -->
+        <p id="devlog-intro" style="text-transform: none; color: #ccc; font-size: 14px; line-height: 1.8; margin-bottom: 40px; max-width: 900px;"></p>
+        
+        <!-- Middle Image Block -->
+        <div style="margin-bottom: 40px;">
+            <img id="devlog-middle-img" src="" alt="Dev Update Detail" style="width: 100%; max-height: 500px; object-fit: cover; border: 1px solid #222;">
+        </div>
+        
+        <!-- Second Text Block -->
+        <p id="devlog-body" style="text-transform: none; color: #ccc; font-size: 14px; line-height: 1.8; margin-bottom: 50px; max-width: 900px;"></p>
+    </div>
+
+    <!-- AAA STUDIO FOOTER -->
+    <footer class="site-footer">
+        <p>&copy; 2026 MSP Games. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a onclick="switchPage('support')">Privacy Policy</a>
+            <a onclick="switchPage('support')">Terms of Service</a>
+            <a onclick="switchPage('support')">Contact Support</a>
+        </div>
+    </footer>
+
+    <!-- External JavaScript Linked -->
+    <script src="js/main.jss"></script>
+</body>
+</html>
